@@ -1,11 +1,11 @@
 .shop {
   margin-top: 100px;
   text-align: center;
+  position: relative;
 
   @include on-tablet {
     margin-top: 130px;
     text-align: left;
-
     @include page-grid;
   }
 
@@ -17,18 +17,22 @@
     font-family: Poppins, sans-serif;
     font-size: 24px;
     font-weight: 600;
-    font-style: normal;
     line-height: 150%;
     color: $title-color;
     text-transform: uppercase;
     letter-spacing: 1.2px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
 
-    @include hover-effect(transform, scale(1.1));
+    &:hover {
+      transform: scale(1.05);
+      color: darken($title-color, 10%);
+    }
   }
 
   &__title-n {
     @include on-tablet {
-      grid-column: 1/ 4;
+      grid-column: 1 / 4;
     }
 
     @include on-desktop {
@@ -36,149 +40,205 @@
     }
   }
 
-  &__left-img {
-    @include on-tablet {
-      grid-column: 1 / 4;
-    }
-
-    @include on-desktop {
-      grid-column: 2 / 7;
-    }
-  }
-
-  &__right-img {
-    display: none;
-
-    @include on-tablet {
-      display: block;
-      grid-column: 4 / 7;
-
-
-    }
-
-    @include on-desktop {
-      grid-column: 8 / 13;
-    }
-  }
-
-  &__nav-list {
+  &__product-container {
     display: flex;
-    gap: 34px;
-    justify-content: center;
-    margin-top: 20px;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
 
     @include on-tablet {
-      justify-content: start;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+      grid-column: 1 / -1;
+    }
+
+    @include on-desktop {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 
-  &__nav-item {
+  &__product-card {
     position: relative;
-
-    font-family: Poppins, sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    font-style: normal;
-    line-height: 130%;
-    color: $shop-form-col;
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 0.7px;
-
-    @include hover-effect(transform, scale(1.2));
-
+    width: 100%;
+    max-width: 280px;
+    transition: all 0.3s ease;
 
     &:hover {
-      color: $main-text-color;
-      &::after {
-          content: "";
+      transform: translateY(-5px);
 
-          position: absolute;
-          bottom: -10px;
-          left: 0;
-
-          display: block;
-
-          width: 100%;
-          border-bottom: 2px solid $main-text-color;
+      .shop__product-overlay {
+        opacity: 1;
       }
+    }
+
+    @include on-tablet {
+      max-width: none;
+    }
+  }
+
+  &__product-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(52, 79, 16, 0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
+
+  &__add-to-cart {
+    background: $main-text-color;
+    color: $button-color;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 15px;
+    cursor: pointer;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: darken($main-text-color, 10%);
     }
   }
 
   &__img {
     width: 100%;
     height: auto;
-    margin-top: 27px;
+    transition: transform 0.3s ease;
+    aspect-ratio: 1/1;
+    object-fit: cover;
 
-    @include hover-effect(transform, scale(1.1));
+    &:hover {
+      transform: scale(1.02);
+    }
   }
 
   &__name {
-    cursor: pointer;
-
     display: block;
-
-    margin-top: 20px;
-
+    margin-top: 15px;
     font-family: Poppins, sans-serif;
     font-size: 18px;
     font-weight: 600;
-    font-style: normal;
     line-height: 150%;
     color: $main-text-color;
     text-transform: uppercase;
-    letter-spacing: 0.9px;
+    transition: color 0.3s ease;
 
-    @include hover-effect(transform, scale(1.1));
-
+    &:hover {
+      color: $title-color;
+    }
   }
 
   &__price {
     display: block;
-
-    margin-top: 10px;
-
+    margin-top: 8px;
     font-size: 16px;
     font-weight: 500;
+    color: $title-color;
+  }
+
+  &__nav-list {
+    display: flex;
+    gap: 34px;
+    justify-content: center;
+    margin: 30px 0;
+
+    @include on-tablet {
+      justify-content: flex-start;
+    }
+  }
+
+  &__nav-item {
+    position: relative;
+    font-family: Poppins, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: $shop-form-col;
+    text-decoration: none;
     text-transform: uppercase;
+    padding-bottom: 5px;
+    transition: all 0.3s ease;
+
+    &.active {
+      color: $main-text-color;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: $main-text-color;
+      }
+    }
+
+    &:hover {
+      color: $main-text-color;
+      transform: translateY(-2px);
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: $main-text-color;
+      }
+    }
   }
 
   &__button {
     cursor: pointer;
-
-    display: flex;
-    grid-column: 3 / 5;
-    flex-direction: column;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-
     width: 280px;
     height: 60px;
-    margin: auto;
-    margin-top: 30px;
-    border: none;
-
+    margin-top: 40px;
+    border: 2px solid $main-text-color;
     font-size: 16px;
     font-weight: 600;
-    font-style: normal;
-    line-height: 130%;
     color: $button-color;
     text-transform: uppercase;
     letter-spacing: 2.4px;
-
     background-color: $main-text-color;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 
-    transition: all 0.3s;
+    &:hover {
+      color: $main-text-color;
+      background-color: transparent;
 
-    @include on-desktop {
-      grid-column: 6 / 9;
+      &::before {
+        transform: translateX(0);
+      }
     }
-  }
 
-  &__button:hover {
-    border: 1px solid $main-text-color;
-    color: $main-text-color;
-    background-color: $bg-color;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: $bg-color;
+      z-index: -1;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+    }
   }
 
   &__left-side {
@@ -187,27 +247,45 @@
     @include on-desktop {
       display: flex;
       flex-direction: row-reverse;
-      place-self: start start;
+      align-items: center;
       writing-mode: vertical-lr;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
     }
   }
 
   &__line {
     width: 1px;
     height: 100px;
-    margin-top: 10px;
-    background: rgba(52, 79, 16, 0.50);
+    margin: 10px 0;
+    background: rgba(52, 79, 16, 0.5);
   }
 
   &__left {
-    transform: rotate(-180deg);
-
+    transform: rotate(180deg);
     font-size: 14px;
     font-weight: 500;
-    font-style: normal;
-    line-height: 130%;
-    color: rgba(52, 79, 16, 0.50);
-    text-align: center;
+    color: rgba(52, 79, 16, 0.5);
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
   }
 }
 
+// Product hover animation
+@keyframes productHover {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.shop__product-card:hover {
+  animation: productHover 1.5s ease infinite;
+}

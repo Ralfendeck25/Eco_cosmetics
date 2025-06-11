@@ -1,3 +1,5 @@
+@use 'vars' as *; 
+
 @mixin on-mobile {
   @media (min-width: $mobile-min-width) {
     @content;

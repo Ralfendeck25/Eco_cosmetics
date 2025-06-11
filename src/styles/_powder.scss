@@ -31,7 +31,7 @@
     margin-left: 20px;
 
     @include on-tablet {
-      display: none;
+      display: flex;
     }
   }
 

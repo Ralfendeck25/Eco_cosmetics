@@ -1,15 +1,19 @@
-@import 'utils';
-@import 'typography';
-@import 'header';
-@import 'page';
-@import 'brand';
-@import 'icon';
-@import 'menu';
-@import 'nav';
-@import 'gifts';
-@import 'about';
-@import 'shop';
-@import 'creators';
-@import 'powder';
-@import 'contact-us';
-@import 'footer';
+// src/styles/main.scss
+@use 'utils/vars' as *;
+@use 'utils/mixins' as *;
+@use 'utils/extends' as *;
+
+@use 'typography';
+@use 'header';
+@use 'page';
+@use 'brand';
+@use 'gifts';
+@use 'about';
+@use 'shop';
+@use 'creators';
+@use 'powder';
+@use 'contact-us';
+@use 'footer';
+@use 'menu';
+@use 'nav';
+@use 'icon';

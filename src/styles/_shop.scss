@@ -1,0 +1,288 @@
+.shop {
+  margin-top: 100px;
+  text-align: center;
+  position: relative;
+
+  @include on-tablet {
+    margin-top: 130px;
+    text-align: left;
+
+    @include page-grid;
+  }
+
+  @include on-desktop {
+    margin-top: 238px;
+  }
+
+  &__title {
+    font-family: Poppins, sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 150%;
+    color: $title-color;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05);
+      color: color.adjust($title-color, $lightness: -10%);
+    }
+  }
+
+  &__title-n {
+    @include on-tablet {
+      grid-column: 1 / 4;
+    }
+
+    @include on-desktop {
+      grid-column: 2 / 4;
+    }
+  }
+
+  &__product-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+
+    @include on-tablet {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+      grid-column: 1 / -1;
+    }
+
+    @include on-desktop {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &__product-card {
+    position: relative;
+    width: 100%;
+    max-width: 280px;
+    transition: all 0.3s ease;
+
+    @include on-tablet {
+      max-width: none;
+    }
+  }
+
+  &__product-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(52, 79, 16, 0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
+
+  &__product-card:hover {
+    transform: translateY(-5px);
+
+    .shop__product-overlay {
+      opacity: 1;
+    }
+  }
+
+  &__add-to-cart {
+    background: $main-text-color;
+    color: $button-color;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 15px;
+    cursor: pointer;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: color.adjust($main-text-color, $lightness: -10%);
+    }
+  }
+
+  &__img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+
+  &__name {
+    display: block;
+    margin-top: 15px;
+    font-family: Poppins, sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 150%;
+    color: $main-text-color;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: $title-color;
+    }
+  }
+
+  &__price {
+    display: block;
+    margin-top: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    color: $title-color;
+  }
+
+  &__nav-list {
+    display: flex;
+    gap: 34px;
+    justify-content: center;
+    margin: 30px 0;
+
+    @include on-tablet {
+      justify-content: flex-start;
+    }
+  }
+
+  &__nav-item {
+    position: relative;
+    font-family: Poppins, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: $shop-form-col;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding-bottom: 5px;
+    transition: all 0.3s ease;
+
+    &.active {
+      color: $main-text-color;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: $main-text-color;
+      }
+    }
+
+    &:hover {
+      color: $main-text-color;
+      transform: translateY(-2px);
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: $main-text-color;
+      }
+    }
+  }
+
+  &__button {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 280px;
+    height: 60px;
+    margin-top: 40px;
+    border: 2px solid $main-text-color;
+    font-size: 16px;
+    font-weight: 600;
+    color: $button-color;
+    text-transform: uppercase;
+    letter-spacing: 2.4px;
+    background-color: $main-text-color;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: $bg-color;
+      z-index: -1;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+    }
+
+    &:hover {
+      color: $main-text-color;
+      background-color: transparent;
+
+      &::before {
+        transform: translateX(0);
+      }
+    }
+  }
+
+  &__left-side {
+    display: none;
+
+    @include on-desktop {
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      writing-mode: vertical-lr;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
+  &__line {
+    width: 1px;
+    height: 100px;
+    margin: 10px 0;
+    background: rgba(52, 79, 16, 0.5);
+  }
+
+  &__left {
+    transform: rotate(180deg);
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(52, 79, 16, 0.5);
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+}
+
+/* Product hover animation */
+@keyframes product-hover {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}

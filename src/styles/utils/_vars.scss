@@ -1,11 +1,19 @@
+// Breakpoints
 $mobile-min-width: 320px;
 $tablet-min-width: 768px;
 $desktop-min-width: 1280px;
 $screen-min-width: 1440px;
+
+// Timing
 $effectDuration: 0.3s;
+
+// Colors
 $bg-color: #e4dfd3;
 $main-text-color: #333;
 $title-color: #344f10;
 $button-color: #f2f2f2;
 $shop-form-col: #828282;
 $footer-bg: #8c9772;
+// Fonts
+$font-primary: 'Your Primary Font',
+sans-serif; // Add your actual font stack here

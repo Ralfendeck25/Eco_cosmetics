@@ -68,3 +68,15 @@
     column-gap: 20px;
   }
 }
+
+@mixin responsive-font($mobile-size, $tablet-size, $desktop-size) {
+  font-size: $mobile-size;
+
+  @include on-tablet {
+    font-size: $tablet-size;
+  }
+
+  @include on-desktop {
+    font-size: $desktop-size;
+  }
+}
